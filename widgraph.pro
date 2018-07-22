@@ -24,10 +24,16 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        widget.cpp
+        widget.cpp \
+    edge.cpp \
+    graphwidget.cpp \
+    node.cpp
 
 HEADERS += \
-        widget.h
+        widget.h \
+    edge.h \
+    graphwidget.h \
+    node.h
 
 FORMS += \
         widget.ui

@@ -51,11 +51,18 @@
     </widget>
    </item>
    <item row="1" column="0" colspan="3">
-    <widget class="QGraphicsView" name="graphicsView"/>
+    <widget class="GraphWidget" name="graphicsView"/>
    </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>GraphWidget</class>
+   <extends>QGraphicsView</extends>
+   <header>graphwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
