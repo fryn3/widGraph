@@ -3,7 +3,7 @@
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Widget)
+    ui(new Ui::Widget())
 {
     ui->setupUi(this);
 }
@@ -11,4 +11,10 @@ Widget::Widget(QWidget *parent) :
 Widget::~Widget()
 {
     delete ui;
+}
+
+void Widget::on_btnCreateNode_clicked()
+{
+    Node *node = new Node(ui->graphicsView);
+    ui->graphicsView->scene()->addItem(node);
 }
