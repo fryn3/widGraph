@@ -13,17 +13,14 @@ QT_END_NAMESPACE
 class Node : public QGraphicsItem
 {
 public:
-    Node(GraphWidget *graphWidget);
-
+    Node();
+    ~Node() override;
     void addEdge(Edge *edge);
     QList<Edge *> edges() const;
 
     enum { Type = UserType + 1 };
     int type() const override { return Type; }
-
-    void calculateForces();
-    bool advance();
-
+    static const int RADIUS = 30;
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -31,14 +28,12 @@ public:
 
 protected:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
-
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
     QList<Edge *> edgeList;
     QPointF newPos;
-    GraphWidget *graph;
 };
 
 #endif // NODE_H

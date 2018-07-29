@@ -20,6 +20,7 @@ public:
 
 private slots:
     void on_btnCreateNode_clicked();
+    void on_btnDelete_clicked();
 private:
     Ui::Widget *ui;
 };

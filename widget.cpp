@@ -15,6 +15,12 @@ Widget::~Widget()
 
 void Widget::on_btnCreateNode_clicked()
 {
-    Node *node = new Node(ui->graphicsView);
+    Node *node = new Node();
     ui->graphicsView->scene()->addItem(node);
+}
+
+void Widget::on_btnDelete_clicked()
+{
+    while (!ui->graphicsView->scene()->selectedItems().isEmpty())
+        delete ui->graphicsView->scene()->selectedItems().takeFirst();
 }
