@@ -3,8 +3,8 @@
 
 #include <QGraphicsItem>
 #include <QList>
+#include <edge.h>
 
-class Edge;
 class GraphWidget;
 QT_BEGIN_NAMESPACE
 class QGraphicsSceneMouseEvent;
@@ -12,10 +12,10 @@ QT_END_NAMESPACE
 
 class Node : public QGraphicsItem
 {
+    friend Edge::Edge(Node *sourceNode, Node *destNode);
 public:
     Node();
     ~Node() override;
-    void addEdge(Edge *edge);
     QList<Edge *> edges() const;
 
     enum { Type = UserType + 1 };
@@ -27,10 +27,11 @@ public:
                QWidget *widget) override;
 
 protected:
-    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+    QVariant itemChange(GraphicsItemChange change,
+                        const QVariant &value) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-
+    void addEdge(Edge *edge);
 private:
     QList<Edge *> edgeList;
     QPointF newPos;
