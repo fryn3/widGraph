@@ -22,7 +22,7 @@ private slots:
     void on_btnCreateNode_clicked();
     void on_btnDelete_clicked();
     void on_btnConnectNode_clicked();
-    void sceneSelectionChanged();
+    void graphWidgetClicked(QMouseEvent *event);
 private:
     Ui::Widget *ui;
     int connProcess;

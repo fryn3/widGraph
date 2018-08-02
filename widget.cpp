@@ -7,8 +7,8 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget()), connProcess(CONN::NONE)
 {
     ui->setupUi(this);
-    connect(ui->graphicsView->scene(), &QGraphicsScene::selectionChanged,
-            this, &Widget::sceneSelectionChanged);
+    connect(ui->graphicsView, &GraphWidget::mousePressedSignal,
+            this, &Widget::graphWidgetClicked);
 }
 
 Widget::~Widget()
@@ -42,19 +42,24 @@ void Widget::on_btnConnectNode_clicked()
     }
 }
 
-void Widget::sceneSelectionChanged()
+void Widget::graphWidgetClicked(QMouseEvent *event)
 {
-    auto listItems = ui->graphicsView->scene()->selectedItems();
-    if (listItems.size() == 0) {
+    auto selectedItems = ui->graphicsView->scene()->selectedItems();
+    if (selectedItems.size() == 0) {
+        // Если выделенных элементов нет.
         ui->btnDelete->setEnabled(false);
-    } else if (listItems.size() == 1) {
+        return;
+    } else if (ui->graphicsView->itemAt(event->pos())) {
+        // Если нажатие произошло над элементом сцены.
         ui->btnDelete->setEnabled(true);
-        Node * node = dynamic_cast<Node *>(listItems.at(0));
-        if (node) {
+        Node *node = dynamic_cast<Node *>(selectedItems.at(0));
+        if (node) { // Если выделена вершина.
             if (connProcess == CONN::NEED_SOURCE) {
+                // Отмечаем источник.
                 node->setMark(true);
                 connProcess = CONN::NEED_DEST;
             } else if (connProcess == CONN::NEED_DEST) {
+                // Находим вершину назначения.
                 Node * nSourse = nullptr;
                 foreach (auto it, ui->graphicsView->scene()->items()) {
                     Node *nTemp = dynamic_cast<Node *>(it);
@@ -64,6 +69,7 @@ void Widget::sceneSelectionChanged()
                     }
                 }
                 if (nSourse) {
+                    // Если нашлась выделенная вершина.
                     Edge *e = new Edge(nSourse, node);
                     ui->graphicsView->scene()->addItem(e);
                     nSourse->setMark(false);
