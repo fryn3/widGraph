@@ -79,3 +79,9 @@ void GraphWidget::zoomOut()
 {
     scaleView(1 / qreal(1.2));
 }
+
+void GraphWidget::mousePressEvent(QMouseEvent *event)
+{
+    QGraphicsView::mousePressEvent(event);
+    emit mousePressedSignal(event);
+}

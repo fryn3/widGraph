@@ -24,8 +24,11 @@ protected:
 #if QT_CONFIG(wheelevent)
     void wheelEvent(QWheelEvent *event) override;
 #endif
-
+    void mousePressEvent(QMouseEvent *event) override;
     void scaleView(qreal scaleFactor);
+
+signals:
+    void mousePressedSignal(QMouseEvent *event);
 };
 
 #endif // GRAPHWIDGET_H
