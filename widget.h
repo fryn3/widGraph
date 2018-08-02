@@ -21,8 +21,19 @@ public:
 private slots:
     void on_btnCreateNode_clicked();
     void on_btnDelete_clicked();
+    void on_btnConnectNode_clicked();
+    void sceneSelectionChanged();
 private:
     Ui::Widget *ui;
+    int connProcess;
 };
+
+namespace CONN {
+enum {
+    NONE,
+    NEED_SOURCE,
+    NEED_DEST
+};
+}
 
 #endif // WIDGET_H
