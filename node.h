@@ -13,6 +13,7 @@ QT_END_NAMESPACE
 class Node : public QGraphicsItem
 {
     friend Edge::Edge(Node *sourceNode, Node *destNode);
+    friend Edge::~Edge();
 public:
     Node();
     ~Node() override;
@@ -35,6 +36,7 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
     void addEdge(Edge *edge);
+    void removeEdge(Edge *edge);
 private:
     QList<Edge *> edgeList;
     bool _mark;

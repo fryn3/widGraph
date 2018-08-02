@@ -19,13 +19,18 @@ Node::Node() : _mark(0)
 Node::~Node()
 {
     while (!edgeList.isEmpty())
-        delete  edgeList.takeFirst();
+        delete edgeList.takeFirst();
 }
 
 void Node::addEdge(Edge *edge)
 {
     edgeList << edge;
     edge->adjust();
+}
+
+void Node::removeEdge(Edge *edge)
+{
+    edgeList.removeOne(edge);
 }
 
 bool Node::mark() const
