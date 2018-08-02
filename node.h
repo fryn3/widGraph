@@ -26,6 +26,9 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
 
+    bool mark() const;
+    void setMark(bool mark);
+
 protected:
     QVariant itemChange(GraphicsItemChange change,
                         const QVariant &value) override;
@@ -34,7 +37,7 @@ protected:
     void addEdge(Edge *edge);
 private:
     QList<Edge *> edgeList;
-    QPointF newPos;
+    bool _mark;
 };
 
 #endif // NODE_H

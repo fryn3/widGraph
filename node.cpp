@@ -7,7 +7,7 @@
 #include <QPainter>
 #include <QStyleOption>
 
-Node::Node()
+Node::Node() : _mark(0)
 {
     setFlag(ItemIsSelectable);
     setFlag(ItemIsMovable);
@@ -26,6 +26,17 @@ void Node::addEdge(Edge *edge)
 {
     edgeList << edge;
     edge->adjust();
+}
+
+bool Node::mark() const
+{
+    return _mark;
+}
+
+void Node::setMark(bool mark)
+{
+    _mark = mark;
+    update();
 }
 
 QList<Edge *> Node::edges() const
@@ -48,7 +59,7 @@ QPainterPath Node::shape() const
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
 {
     painter->setBrush((option->state & QStyle::State_Selected ? Qt::cyan: Qt::white));
-    painter->setPen(QPen(Qt::black, 2));
+    painter->setPen(QPen(_mark ? Qt::magenta : Qt::black, 2));
     painter->drawEllipse(-RADIUS, -RADIUS, 2 * RADIUS, 2 * RADIUS);
 }
 
